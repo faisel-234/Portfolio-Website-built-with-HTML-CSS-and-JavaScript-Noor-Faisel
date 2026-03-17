@@ -1,0 +1,443 @@
+
+:root {
+  --color-bg: #070808;          /* Light gray background */
+  --color-white: #f3eaea;       /* Pure white */
+  --color-dark: #6d7379;        /* Dark blue-gray for headings */
+  --color-text: #9e9c9c;        /* Medium gray for body text */
+  --color-accent: #0d1418;      /* Blue accent color for buttons/links */
+  --color-accent-dark: #0b2638; /* Darker blue for hover effects */
+  --color-light-border: #585555;/* Light gray for borders */
+  --color-section-alt: #16181a; /* Slightly blue-tinted background for alt sections */
+
+  --font-heading: 'Georgia', serif;  /* Classic serif font for headings */
+  --font-body: 'Trebuchet MS', sans-serif; /* Clean font for body text */
+
+  --max-width: 800px;  /* Maximum width of the content — keeps it readable */
+  --spacing: 24px;     /* A standard spacing unit used throughout */
+}
+
+
+
+
+/* Apply box-sizing to all elements — makes sizing easier to understand */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base body style */
+body {
+  font-family: var(--font-body);  /* Use our chosen body font */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;  /* Space between lines — 1.7 is comfortable to read */
+}
+
+/* Remove default bullet styling from all lists */
+ul {
+  list-style: none;
+}
+
+/* Remove default underline from links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images flexible — they won't overflow their container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+
+
+.navbar {
+  position: sticky;       /* Sticks to the top when you scroll down */
+  top: 0;                 /* Sticks at the very top edge */
+  z-index: 100;           /* Makes sure it appears above other content */
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-light-border);
+  
+  display: flex;                    /* Flex puts children side by side */
+  justify-content: space-between;   /* One item on the left, one on the right */
+  align-items: center;              /* Center items vertically */
+  padding: 16px 40px;
+}
+
+/* Your name on the left side of the nav */
+.nav-name {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  letter-spacing: 1px;
+}
+
+/* The group of nav links on the right side */
+.nav-links {
+  display: flex;       /* Show links side by side */
+  gap: 28px;           /* Space between each link */
+}
+
+/* Each individual nav link */
+.nav-links a {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: color 0.2s;  /* Smooth color change on hover */
+}
+
+/* When you hover over a nav link, it turns blue */
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+
+
+
+.section-home {
+  min-height: 90vh;          /* At least 90% of the screen height */
+  background-color: var(--color-white);
+  
+  display: flex;
+  align-items: center;       /* Center content vertically */
+  justify-content: center;   /* Center content horizontally */
+  flex-wrap: wrap;            /* Allow items to wrap on small screens */
+  gap: 40px;
+  padding: 60px 40px;
+  max-width: var(--max-width);
+  margin: 0 auto;             /* Center the section itself */
+}
+
+/* ---- Profile Picture Area ---- */
+.profile-picture {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;            /* Don't let it shrink on small screens */
+}
+
+/* The actual <img> tag is styled here */
+.profile-picture img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;        /* Makes the image a circle */
+  object-fit: cover;         /* Crop the image to fill the circle */
+  border: 4px solid var(--color-accent);
+}
+
+/* The placeholder circle shown when no image is available */
+.profile-placeholder {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  border: 4px solid var(--color-accent-dark);
+  
+  /* Hidden by default — shown only if image fails to load */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* 
+  When image loads fine, hide the placeholder
+  When image fails (the onerror in HTML hides the img tag),
+  the placeholder becomes visible underneath 
+*/
+.profile-picture img + .profile-placeholder {
+  display: none;
+}
+
+.profile-picture img[style*="display: none"] + .profile-placeholder {
+  display: flex;
+}
+
+/* ---- Home Text Area ---- */
+.home-text {
+  max-width: 500px;
+}
+
+.greeting {
+  font-size: 1rem;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  color: var(--color-dark);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  font-weight: normal;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+.intro-text {
+  font-size: 0.97rem;
+  color: var(--color-text);
+  margin-bottom: 28px;
+  line-height: 1.8;
+}
+
+
+/* ---- Button Styles ---- */
+
+/* Primary button style — used for the main action buttons */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;            /* Remove the default button border */
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  border-radius: 6px;
+  cursor: pointer;         /* Shows a hand cursor when you hover */
+  transition: background-color 0.25s, transform 0.15s; /* Smooth animation */
+}
+
+/* When you hover over the button, it gets darker and slightly bigger */
+.btn-primary:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px); /* Moves button up by 2px — a subtle lift effect */
+}
+
+/* When you click the button, it presses down */
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+
+
+
+.section-about {
+  background-color: var(--color-section-alt);
+  padding: 70px 40px;
+  max-width: 100%;
+}
+
+/* Inner container — centers the content and limits width */
+.about-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ---- Section Title (reused by Contact section too) ---- */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-dark);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* The decorative line under the section heading */
+.title-underline {
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  margin: 0 auto 40px auto;   /* Centers horizontally, adds space below */
+}
+
+/* Each paragraph in the About section */
+.about-text {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+
+/* ---- Skills Box ---- */
+.skills-box {
+  background-color: var(--color-white);
+  border-left: 4px solid var(--color-accent);  /* Colored left border for style */
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-top: 28px;
+}
+
+.skills-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+/* Each skill item in the list */
+.skills-list li {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--color-light-border);  /* Thin divider line */
+}
+
+/* Remove the divider from the last item */
+.skills-list li:last-child {
+  border-bottom: none;
+}
+
+
+
+.section-contact {
+  background-color: var(--color-white);
+  padding: 70px 40px;
+}
+
+.contact-intro {
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 36px;
+  font-size: 0.97rem;
+}
+
+/* The form wrapper — centered and given a max width */
+.contact-form {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Each field group (label + input + error message) */
+.form-group {
+  margin-bottom: 22px;
+}
+
+/* Label above each input */
+.form-group label {
+  display: block;       /* Makes label appear on its own line */
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  margin-bottom: 6px;
+}
+
+/* Text inputs and the textarea */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  border: 1px solid var(--color-light-border);
+  border-radius: 6px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s;   /* Smooth border color change on focus */
+  outline: none;                   /* Remove the default blue glow */
+}
+
+/* When an input is focused (clicked into), the border turns blue */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--color-accent);
+}
+
+/* The textarea (message box) — disable the diagonal resize handle */
+.form-group textarea {
+  resize: vertical;   /* Allow only vertical resize (not horizontal) */
+}
+
+/* Error message text — hidden by default */
+.error-msg {
+  display: none;       /* Hidden until JavaScript shows it */
+  color: #e74c3c;      /* Red color to show it's an error */
+  font-size: 0.82rem;
+  margin-top: 5px;
+}
+
+/* JavaScript adds the 'visible' class to show the error message */
+.error-msg.visible {
+  display: block;
+}
+
+/* Style the input with a red border when there is an error */
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #e74c3c;
+}
+
+
+
+
+.footer {
+  background-color: var(--color-dark);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.footer-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.footer-year {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.footer-message {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+
+
+
+@media (max-width: 600px) {
+
+  /* Stack the nav links to show below the name */
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  /* Make nav links stack vertically */
+  .nav-links {
+    gap: 16px;
+  }
+
+  /* Make the home section stack vertically (photo on top, text below) */
+  .section-home {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  /* Center the profile picture when stacked */
+  .profile-picture {
+    margin: 0 auto;
+  }
+
+  /* Make the name smaller on phones */
+  .name {
+    font-size: 2rem;
+  }
+
+  /* Reduce padding on smaller screens */
+  .section-about,
+  .section-contact {
+    padding: 50px 20px;
+  }
+}
